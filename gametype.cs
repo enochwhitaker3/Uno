@@ -24,13 +24,16 @@ namespace GameType
                 Console.WriteLine("\nWhat would you like to do?");
                 Console.WriteLine("1: Play Card");
                 Console.WriteLine("2: Draw Card");
+                Console.ForegroundColor = ConsoleColor.Black;
                 int playChoice = Convert.ToInt32(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.White;
                 if (playChoice == 1)
                 {
                     if (user1.canPlay() == false)
                     {
-                        Console.WriteLine("You have no cards able to be played");
-                        Thread.Sleep(500);
+                        Console.WriteLine("You have no cards able to be played!\nDrawing card for you");
+                        Thread.Sleep(1000);
+                        user1.drawCard();
                     }
                     else
                     {
