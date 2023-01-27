@@ -11,7 +11,7 @@ namespace GameType
         GameActions user2 = new GameActions();
         GameActions user3 = new GameActions();
         GameActions user4 = new GameActions();
-        public void singlePlayer()
+        public void devMode()
         {
             user1.startHand();
             Card rando = new Card();
@@ -58,6 +58,7 @@ namespace GameType
             user2.startHand();
             Card rando = new Card();
             user1.startDeck(new Card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
+            user2.startDeck(new Card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
             while (user1.checkWin() != true || user2.checkWin() != true)
             {
                 Console.Clear();

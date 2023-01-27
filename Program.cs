@@ -24,7 +24,7 @@ namespace main
             {
                 case 1:
                     game devMode = new game();
-                    devMode.singlePlayer();
+                    devMode.devMode();
                     break;
                 case 2:
                     game twoPlayers = new game();

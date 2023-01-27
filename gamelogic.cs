@@ -15,6 +15,7 @@ namespace GameLogic
             {
                 Card placeholderCard = new Card();
                 Card newCard = new Card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
+                if (newCard.cardcolor == "WILD") { newCard.cardattribute = null; }
                 playersHand.Add(newCard);
             }
         }
@@ -60,7 +61,12 @@ namespace GameLogic
                 }
                 else if (playersHand[userInput].cardcolor == "WILD")
                 {
-                    Console.WriteLine("What color do you want the deckc to be?");
+                    Console.WriteLine("What color do you want the deck to be?");
+                    string? chooseColor = Console.ReadLine();
+                    if (chooseColor == "BLUE") { Card newCard = new Card() { cardattribute = null , cardcolor = "Blue" }; startDeck(newCard); return newCard;}
+                    if (chooseColor == "RED") { Card newCard = new Card() { cardattribute = null, cardcolor = "Red" }; startDeck(newCard); return newCard; }
+                    if (chooseColor == "YELLOW") { Card newCard = new Card() { cardattribute = null, cardcolor = "Yellow" }; startDeck(newCard); return newCard; }
+                    if (chooseColor == "GREEN") { Card newCard = new Card() { cardattribute = null, cardcolor = "Green" }; startDeck(newCard); return newCard; }
                 }
                 else
                 {
@@ -74,6 +80,7 @@ namespace GameLogic
         {
             Card placeholderCard = new Card();
             Card newCard = new Card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
+            if (newCard.cardcolor == "WILD") { newCard.cardattribute = null; }
             playersHand.Add(newCard);
         }
         public bool checkWin()
