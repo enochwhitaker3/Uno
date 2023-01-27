@@ -11,10 +11,11 @@ namespace main
         {
             GameActions user = new GameActions();
 
-            Console.WriteLine("Welcome to UNO: The World's Number One Card Game!");
+            Console.WriteLine("Welcome to UNO: The World's Number One Card Game!\n");
             Console.WriteLine("How would you like to play?: ");
-            Console.WriteLine("1: With 4 Local Players");
-            Console.WriteLine("2: Exit Program");
+            Console.WriteLine("1: Developer Mode");
+            Console.WriteLine("2: Two Players");
+            Console.WriteLine("3: Exit Program\n");
             Console.WriteLine("More options coming soon!....\n");
             int userInput = Convert.ToInt32(Console.ReadLine());
             user.startHand();
@@ -22,12 +23,17 @@ namespace main
             switch (userInput)
             {
                 case 1:
-                    game singlePlayer = new game();
-                    singlePlayer.singlePlayer();
+                    game devMode = new game();
+                    devMode.singlePlayer();
                     break;
-
+                case 2:
+                    game twoPlayers = new game();
+                    twoPlayers.twoPlayers();
+                    break;
+                case 3:
+                    Environment.Exit(0);
+                    break;
             }
-
         }
     }
 }
