@@ -67,6 +67,9 @@ namespace GameLogic
                     if (chooseColor == "RED") { Card newCard = new Card() { cardattribute = null, cardcolor = "Red" }; startDeck(newCard); return newCard; }
                     if (chooseColor == "YELLOW") { Card newCard = new Card() { cardattribute = null, cardcolor = "Yellow" }; startDeck(newCard); return newCard; }
                     if (chooseColor == "GREEN") { Card newCard = new Card() { cardattribute = null, cardcolor = "Green" }; startDeck(newCard); return newCard; }
+                    Card brandnewplaceholder = playersHand[userInput];
+                    playersHand.RemoveAt(userInput);
+                    return brandnewplaceholder;
                 }
                 else
                 {
