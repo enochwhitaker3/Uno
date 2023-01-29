@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Cards
+namespace Card
 {
-    public class Card
+    public class card
     {
         public string? cardcolor { get; set; }
         public string? cardattribute { get; set; }

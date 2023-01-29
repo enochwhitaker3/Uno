@@ -1,7 +1,8 @@
 ﻿using System;
-using Cards;
+using Card;
 using GameLogic;
 using GameType;
+using Deck;
 
 namespace main
 {

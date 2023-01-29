@@ -1,5 +1,6 @@
 ﻿using System;
-using Cards;
+using Card;
+using Deck;
 
 
 namespace GameLogic
@@ -7,21 +8,17 @@ namespace GameLogic
 
     class GameActions 
     {
-        List<Card> playersHand = new List<Card>();
-        Card topDeckCard = new Card();
+        List<card> playersHand = new List<card>();
+        deck cardPile = new deck();
         public void startHand()
         {
             for (int i = 0; i < 7; i++)
             {
-                Card placeholderCard = new Card();
-                Card newCard = new Card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
+                card placeholderCard = new card();
+                card newCard = new card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
                 if (newCard.cardcolor == "WILD") { newCard.cardattribute = null; }
                 playersHand.Add(newCard);
             }
-        }
-        public void startDeck(Card card)
-        {
-            topDeckCard = card;
         }
         public void displayHand()
         {
@@ -37,16 +34,8 @@ namespace GameLogic
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        public void displayDeck()
-        {
-            if (topDeckCard.cardcolor == "Red") { Console.ForegroundColor = ConsoleColor.Red; }
-            if (topDeckCard.cardcolor == "Blue") { Console.ForegroundColor = ConsoleColor.Blue; }
-            if (topDeckCard.cardcolor == "Green") { Console.ForegroundColor = ConsoleColor.Green; }
-            if (topDeckCard.cardcolor == "Yellow") { Console.ForegroundColor = ConsoleColor.Yellow; }
-            Console.WriteLine(topDeckCard.cardcolor + "\t\t" + topDeckCard.cardattribute);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-        public Card playCard()
+
+        public card playCard(deck deck)
         {
             while (true)
             {
@@ -54,7 +43,7 @@ namespace GameLogic
                 int userInput = Convert.ToInt32(Console.ReadLine());
                 userInput--;
                 Console.ForegroundColor = ConsoleColor.White;
-                if (playersHand[userInput].cardcolor != topDeckCard.cardcolor && playersHand[userInput].cardattribute != topDeckCard.cardattribute && playersHand[userInput].cardcolor != "WILD")
+                if (playersHand[userInput].cardcolor != deck.getTopDeck().cardcolor && playersHand[userInput].cardattribute != deck.getTopDeck().cardattribute && playersHand[userInput].cardcolor != "WILD")
                 {
                     Console.WriteLine("You cannot play that card!\nPlease try again: ");
                     Thread.Sleep(1000);
@@ -63,17 +52,17 @@ namespace GameLogic
                 {
                     Console.WriteLine("What color do you want the deck to be?");
                     string? chooseColor = Console.ReadLine();
-                    if (chooseColor == "BLUE") { Card newCard = new Card() { cardattribute = null , cardcolor = "Blue" }; startDeck(newCard); return newCard;}
-                    if (chooseColor == "RED") { Card newCard = new Card() { cardattribute = null, cardcolor = "Red" }; startDeck(newCard); return newCard; }
-                    if (chooseColor == "YELLOW") { Card newCard = new Card() { cardattribute = null, cardcolor = "Yellow" }; startDeck(newCard); return newCard; }
-                    if (chooseColor == "GREEN") { Card newCard = new Card() { cardattribute = null, cardcolor = "Green" }; startDeck(newCard); return newCard; }
-                    Card brandnewplaceholder = playersHand[userInput];
+                    if (chooseColor == "BLUE") { card newCard = new card() { cardattribute = null , cardcolor = "Blue" }; cardPile.startDeck(newCard); return newCard;}
+                    if (chooseColor == "RED") { card newCard = new card() { cardattribute = null, cardcolor = "Red" }; cardPile.startDeck(newCard); return newCard; }
+                    if (chooseColor == "YELLOW") { card newCard = new card() { cardattribute = null, cardcolor = "Yellow" }; cardPile.startDeck(newCard); return newCard; }
+                    if (chooseColor == "GREEN") { card newCard = new card() { cardattribute = null, cardcolor = "Green" }; cardPile.startDeck(newCard); return newCard; }
+                    card brandnewplaceholder = playersHand[userInput];
                     playersHand.RemoveAt(userInput);
                     return brandnewplaceholder;
                 }
                 else
                 {
-                    Card brandnewplaceholder = playersHand[userInput];
+                    card brandnewplaceholder = playersHand[userInput];
                     playersHand.RemoveAt(userInput);
                     return brandnewplaceholder;
                 }
@@ -81,8 +70,8 @@ namespace GameLogic
         }
         public void drawCard()
         {
-            Card placeholderCard = new Card();
-            Card newCard = new Card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
+            card placeholderCard = new card();
+            card newCard = new card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
             if (newCard.cardcolor == "WILD") { newCard.cardattribute = null; }
             playersHand.Add(newCard);
         }
@@ -97,11 +86,11 @@ namespace GameLogic
                 return false;
             }
         }
-        public bool canPlay()
+        public bool canPlay(deck deck)
         {
             for (int i = 0; i <= playersHand.Count - 1; i++)
             {
-                if (playersHand[i].cardcolor != topDeckCard.cardcolor && playersHand[i].cardattribute != topDeckCard.cardattribute && playersHand[i].cardcolor != "WILD")
+                if (playersHand[i].cardcolor != deck.getTopDeck().cardcolor && playersHand[i].cardattribute != deck.getTopDeck().cardattribute && playersHand[i].cardcolor != "WILD")
                 {
                     if (i == playersHand.Count - 1)
                     {

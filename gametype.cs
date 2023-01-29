@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection.Metadata;
-using Cards;
+using Card;
 using GameLogic;
+using Deck;
 
 namespace GameType
 {
@@ -12,16 +13,17 @@ namespace GameType
         GameActions user3 = new GameActions();
         GameActions user4 = new GameActions();
         GameActions switcher = new GameActions();
+        deck cardPile = new deck();
         public void devMode()
         {
             user1.startHand();
-            Card rando = new Card();
-            user1.startDeck(new Card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
+            card rando = new card();
+            cardPile.startDeck(new card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
             while (user1.checkWin() != true)
             {
                 Console.Clear();
                 Console.WriteLine("The Deck: ");
-                user1.displayDeck();
+                cardPile.displayDeck();
                 Console.WriteLine("\nYour hand: ");
                 user1.displayHand();
                 Console.WriteLine("\nWhat would you like to do?");
@@ -32,7 +34,7 @@ namespace GameType
                 Console.ForegroundColor = ConsoleColor.White;
                 if (playChoice == 1)
                 {
-                    if (user1.canPlay() == false)
+                    if (user1.canPlay(cardPile) == false)
                     {
                         Console.WriteLine("You have no cards able to be played!\nDrawing card for you");
                         Thread.Sleep(1000);
@@ -41,7 +43,7 @@ namespace GameType
                     else
                     {
                         Console.WriteLine("What card do you want to play?");
-                        user1.startDeck(user1.playCard());
+                        cardPile.startDeck(user1.playCard(cardPile));
                     }
                 }
                 else if (playChoice == 2)
@@ -57,9 +59,8 @@ namespace GameType
         {
             user1.startHand();
             user2.startHand();
-            Card rando = new Card();
-            user1.startDeck(new Card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
-            user2.startDeck(new Card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
+            card rando = new card();
+            cardPile.startDeck(new card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
             int a = 0;
             int b = 2;
             while (user1.checkWin() != true || user2.checkWin() != true)
@@ -68,7 +69,7 @@ namespace GameType
                 else {switcher = user2;}
                 Console.Clear();
                 Console.WriteLine("The Deck: ");
-                switcher.displayDeck();
+                cardPile.displayDeck();
                 Console.WriteLine("\nYour hand: ");
                 switcher.displayHand();
                 Console.WriteLine("\nWhat would you like to do?");
@@ -79,7 +80,7 @@ namespace GameType
                 Console.ForegroundColor = ConsoleColor.White;
                 if (playChoice == 1)
                 {
-                    if (switcher.canPlay() == false)
+                    if (switcher.canPlay(cardPile) == false)
                     {
                         Console.WriteLine("You have no cards able to be played!\nDrawing card for you");
                         Thread.Sleep(1000);
@@ -88,7 +89,7 @@ namespace GameType
                     else
                     {
                         Console.WriteLine("What card do you want to play?");
-                        switcher.startDeck(switcher.playCard());
+                        cardPile.startDeck(switcher.playCard(cardPile));
                     }
                 }
                 else if (playChoice == 2)
