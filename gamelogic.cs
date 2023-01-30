@@ -34,7 +34,6 @@ namespace GameLogic
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-
         public card playCard(deck deck)
         {
             while (true)
@@ -52,13 +51,11 @@ namespace GameLogic
                 {
                     Console.WriteLine("What color do you want the deck to be?");
                     string? chooseColor = Console.ReadLine();
+                    playersHand.RemoveAt(userInput);
                     if (chooseColor == "BLUE") { card newCard = new card() { cardattribute = null , cardcolor = "Blue" }; cardPile.startDeck(newCard); return newCard;}
                     if (chooseColor == "RED") { card newCard = new card() { cardattribute = null, cardcolor = "Red" }; cardPile.startDeck(newCard); return newCard; }
                     if (chooseColor == "YELLOW") { card newCard = new card() { cardattribute = null, cardcolor = "Yellow" }; cardPile.startDeck(newCard); return newCard; }
                     if (chooseColor == "GREEN") { card newCard = new card() { cardattribute = null, cardcolor = "Green" }; cardPile.startDeck(newCard); return newCard; }
-                    card brandnewplaceholder = playersHand[userInput];
-                    playersHand.RemoveAt(userInput);
-                    return brandnewplaceholder;
                 }
                 else
                 {
@@ -74,17 +71,6 @@ namespace GameLogic
             card newCard = new card() { cardattribute = placeholderCard.cardAttribute(), cardcolor = placeholderCard.cardColor() };
             if (newCard.cardcolor == "WILD") { newCard.cardattribute = null; }
             playersHand.Add(newCard);
-        }
-        public bool checkWin()
-        {
-            if (playersHand.Count == 0)
-            {
-                return true; 
-            }
-            else
-            {
-                return false;
-            }
         }
         public bool canPlay(deck deck)
         {
@@ -104,6 +90,16 @@ namespace GameLogic
             }
             throw new Exception("error");
         }
-
+        public bool checkWin()
+        {
+            if (playersHand.Count == 0)
+            {
+                return true; 
+            }
+            else
+            {
+                return false;
+            }
+        }
     } 
 }
