@@ -3,23 +3,25 @@ using System.Reflection.Metadata;
 using Card;
 using GameLogic;
 using Deck;
+using Player;
 
 namespace GameType
 {
     public class game
     {
-        GameActions user1 = new GameActions();
-        GameActions user2 = new GameActions();
-        GameActions user3 = new GameActions();
-        GameActions user4 = new GameActions();
-        GameActions switcher = new GameActions();
+        player user1 = new player();
+        player user2 = new player();    
+        player user3 = new player();
+        player user4= new player();
+        player switcher = new player();
+        gamelogic validator = new gamelogic();  
         deck cardPile = new deck();
         public void devMode()
         {
             user1.startHand();
             card rando = new card();
             cardPile.startDeck(new card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
-            while (user1.checkWin() != true)
+            while (validator.checkWin(user1) != true)
             {
                 Console.Clear();
                 Console.WriteLine("The Deck: ");
@@ -34,7 +36,7 @@ namespace GameType
                 Console.ForegroundColor = ConsoleColor.White;
                 if (playChoice == 1)
                 {
-                    if (user1.canPlay(cardPile) == false)
+                    if (validator.canPlay(cardPile, user1) == false)
                     {
                         Console.WriteLine("You have no cards able to be played!\nDrawing card for you");
                         Thread.Sleep(1000);
@@ -63,7 +65,7 @@ namespace GameType
             cardPile.startDeck(new card() { cardcolor = rando.cardColor(), cardattribute = rando.cardAttribute() });
             int a = 0;
             int b = 2;
-            while (user1.checkWin() != true || user2.checkWin() != true)
+            while (validator.checkWin(user1) != true && validator.checkWin(user2) != true)
             {
                 if (a % b == 0) {switcher = user1;}
                 else {switcher = user2;}
@@ -80,7 +82,7 @@ namespace GameType
                 Console.ForegroundColor = ConsoleColor.White;
                 if (playChoice == 1)
                 {
-                    if (switcher.canPlay(cardPile) == false)
+                    if (validator.canPlay(cardPile, switcher) == false)
                     {
                         Console.WriteLine("You have no cards able to be played!\nDrawing card for you");
                         Thread.Sleep(1000);
@@ -95,6 +97,11 @@ namespace GameType
                 else if (playChoice == 2)
                 {
                     switcher.drawCard();
+                }
+                else
+                {
+                    Console.WriteLine("Please Only Type One Of The Options");
+                    Thread.Sleep(1000);
                 }
                 a++;
             }

@@ -3,6 +3,7 @@ using Card;
 using GameLogic;
 using GameType;
 using Deck;
+using Player;
 
 namespace main
 {
@@ -10,7 +11,7 @@ namespace main
     {
         static void Main(string[] args)
         {
-            GameActions user = new GameActions();
+            player user = new player();
 
             Console.WriteLine("Welcome to UNO: The World's Number One Card Game!\n");
             Console.WriteLine("How would you like to play?: ");

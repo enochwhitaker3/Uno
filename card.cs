@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using GameLogic;
 
 namespace Card
 {
