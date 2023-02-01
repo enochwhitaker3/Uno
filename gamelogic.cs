@@ -43,6 +43,10 @@ namespace GameLogic
             {
                 return 1;
             }
+            else if (card.cardattribute == "%")
+            {
+                return 2;
+            }
             return 0;
         }
     } 

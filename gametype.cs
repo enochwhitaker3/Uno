@@ -94,8 +94,12 @@ namespace GameType
                         cardPile.startDeck(switcher.playCard(cardPile));
                         if (validator.specialCase(cardPile.getTopDeck()) == 1)
                         {
-                            Console.WriteLine("Did this work?");
-                            Thread.Sleep(1000);
+                            if(a%b == 0) {user2.drawCard(); user2.drawCard(); }
+                            else { user1.drawCard(); user1.drawCard(); }
+                        }
+                        else if (validator.specialCase(cardPile.getTopDeck()) == 2)
+                        {
+                            a--;
                         }
                     }
                 }
