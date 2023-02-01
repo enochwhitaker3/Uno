@@ -37,5 +37,13 @@ namespace GameLogic
                 return false;
             }
         }
+        public int specialCase(card card)
+        {
+            if (card.cardattribute == "+2")
+            {
+                return 1;
+            }
+            return 0;
+        }
     } 
 }

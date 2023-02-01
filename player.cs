@@ -66,7 +66,6 @@ namespace Player
                 }
             }
         }
-
         public void drawCard()
         {
             card placeholderCard = new card();

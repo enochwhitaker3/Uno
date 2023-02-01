@@ -92,6 +92,11 @@ namespace GameType
                     {
                         Console.WriteLine("What card do you want to play?");
                         cardPile.startDeck(switcher.playCard(cardPile));
+                        if (validator.specialCase(cardPile.getTopDeck()) == 1)
+                        {
+                            Console.WriteLine("Did this work?");
+                            Thread.Sleep(1000);
+                        }
                     }
                 }
                 else if (playChoice == 2)
